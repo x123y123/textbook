@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib as plt
-#from sklearn.linear_model import LinearRegression
-#from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
 
 # x_feature
 x = np.array([2360, 2380, 2400, 2420, 2440, 2460, 2480, 2500, 2520, 2540, 2560, 2580, 2600, 2620, 2640, 2660]).reshape(-1, 1)
