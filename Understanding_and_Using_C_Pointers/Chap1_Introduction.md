@@ -182,7 +182,7 @@ pci = &limit;
 
 ### Constant pointers to "nonconstants"
 Example:
-```clike
+```c
 int num;
 int limit = 500;
 int *const cpi = &num;
@@ -199,9 +199,10 @@ Given a constant pointer to a constant we cannot:
 * Modify the pointer
 * Modify the data pointed to by the pointer
 ### Summary
-| Pointer | Pointer Modifiable | Data Pointed to Modifiable |
-| Pointer to a `nonconstant`| Y | Y |
-| Pointer to a `constant` | Y | N |
+| Pointer                             | Pointer Modifiable | Data Pointed to Modifiable |
+|-------------------------------------|---|---|
+| Pointer to a `nonconstant`          | Y | Y |
+| Pointer to a `constant`             | Y | N |
 | Constant pointer to a `nonconstant` | N | Y |
-| Constant pointer to a `constant` | N | N |
+| Constant pointer to a `constant`    | N | N |
 
