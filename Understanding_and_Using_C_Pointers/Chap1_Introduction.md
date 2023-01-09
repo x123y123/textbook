@@ -10,7 +10,7 @@
   * Determined by the pointers that reference this memory.
 
 ## Declaring Pointers
-```clike
+```c
 // All folowings are the same
 
 int* pi;
@@ -26,7 +26,7 @@ There are severall points to remember:
 > By garbage, we mean the memory allocation could contain any value. When memory is allocated it is not cleared. The previous contents could be anything. If the previous contents held a floating point number, in‐ terpreting it as an integer would likely not be useful. Even if it contained an integer, it would not likely be the right integer. Thus, its contents are said to hold garbage.
 
 ## How to read a declaration - "Read them backward"
-```clike
+```c
 const int *pci;
 ```
 1. pci is a variable                                               `pci;`
@@ -38,14 +38,14 @@ const int *pci;
 > Assignment of integers to a pointer will generally cause a warning or error.
 
 But if we cast an integer to a pointer to an integer:
-```clike 
+```c
 pi = (int *)num;
 ```
 This will not generate a syntax error. When executed, though, the program may `terminate abnormally` when the program attempts to dereference the value `at address zero`.
 
 ## Displaying pointer values
 
-```clike
+```c
 %x  // hexadecimal number 
 %o  // octal number
 %p  // Displays the value in an implementation-specific manner; typically as a hexadecimal number.
@@ -61,13 +61,13 @@ We usually use `%p` specifier for address.
 ## Dereferencing a pointer using the "Indirection operator"
 The indirection operator, `*`,also can call it `value of`.
 Example:
-```clike
+```c
 int num = 5;
 int *pi = &num;
 printf("%p\n", *pi);  // Display 5
 ```
 ## Pointer to Functions
-```clike
+```c
 void (*foo)();  //The function is passed void and returns void.
 ```
 ## The concept of "NULL"
@@ -81,7 +81,7 @@ We often deal with several similar, yet distinct concepts, including:
 > When NULL is assigned to a pointer, it means the pointer does not point to anything.
 
 The NULL macro is a constant integer zero cast to a pointer to void. In many libraries, it is defined as follows:
-```clike
+```c
 #define NULL    ((void *)0)
 
 // this define can be found in stddef.h, stdlib.h, stdio.h
@@ -89,7 +89,7 @@ The NULL macro is a constant integer zero cast to a pointer to void. In many lib
 The use of NULL and 0 are language-level symbols that represent a null pointer.
 
 > A null pointer and an uninitialized pointer are different. An uninitial‐ ized pointer can contain any value, whereas a pointer containing NULL does not reference any location in memory.
-```clike
+```c
 // pi is a pointer variable
 pi = 0;
 pi = NULL;
@@ -102,7 +102,7 @@ pi = num;   // Syntax error
 ```
 ### Using 0 or NULL
 The meaning of zero changes depending on its context. It might mean the integer zero in some contexts, and it might mean a null pointer in a different context. Consider the following example:
-```clike
+```c
 int num;
 int *pi = 0;    // Zero refers to the null pointer,NULL 
 pi = &num;
@@ -114,7 +114,7 @@ It has two interesting properties:
 * A pointer to void will never be equal to another pointer. However, two void pointers assigned a NULL value will be equal.
 > Pointers to void are used for data pointers, not function pointers.
 The sizeof operator can be used with a pointer to void. However, we cannot use the operator with void as shown below:
-```clike
+```c
 size_t size = sizeof(void*); // Legal 
 size_t size = sizeof(void); // Illegal
 ```
@@ -132,7 +132,7 @@ If a pointer is declared as global or static, `it is initialized to NULL when th
 #### size_t
 
 The declaration of size_t:
-```clike 
+```c 
 #ifndef __SIZE_T
 #define __SIZE_T
 typedef unsigned int size_t;
@@ -144,14 +144,14 @@ typedef unsigned int size_t;
 #### intptr_t and uintptr_t
 They are useful for converting pointers to their integer representation.
 > If we try to assign the address of an integer to a pointer of type uintptr_t as follows, we will get a syntax error
-```clike
+```c
 int a = 12345;
 int *p = &a;
 int ptr = (int)p;
 ```
 it'll cause `Wpointer-to-int-cast` warning, because sizeof(int) and sizeof(int pointer) are different.
 We need to use `intptr_t` or `uintptr_t` :
-```clike
+```c
 uintptr_t a = 12345;
 uintptr_t *p = &a;
 uintptr_t ptr = (uintptr_t)p;
@@ -160,13 +160,13 @@ uintptr_t ptr = (uintptr_t)p;
 Using multiple levels of indirection provides additional flexibility in how code can be written and used. Certain types of operations would otherwise be more difficult.
 ### Constants and Pointers
 We cannot dereference a constant pointer to change what the pointer references, but we can change the pointer.
-```clike
+```c
 int num = 10;
 const int *ptr1 = &num;         // ptr1 is a pointer variable point to a const int
 int *const ptr2 = &num;         // const pointer variable ptr2 point to a int, we cannot modify ptr2
 ```
 Example:
-```clike
+```c
 int num = 5;
 const int limit = 500; 
 int *pi;                // Pointer to an integer
