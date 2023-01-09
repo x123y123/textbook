@@ -100,3 +100,108 @@ pi = num;   // Syntax error
 > A null pointer should never be dereferenced because it does not contain a valid address. When executed it will result in the program terminating.
 
 ```
+### Using 0 or NULL
+The meaning of zero changes depending on its context. It might mean the integer zero in some contexts, and it might mean a null pointer in a different context. Consider the following example:
+```clike
+int num;
+int *pi = 0;    // Zero refers to the null pointer,NULL 
+pi = &num;
+*pi = 0;        // Zero refers to the integer zero
+```
+#### Pointer to Void
+It has two interesting properties:
+* A pointer to void will have the same representation and memory alignmentas a pointer to char.
+* A pointer to void will never be equal to another pointer. However, two void pointers assigned a NULL value will be equal.
+> Pointers to void are used for data pointers, not function pointers.
+The sizeof operator can be used with a pointer to void. However, we cannot use the operator with void as shown below:
+```clike
+size_t size = sizeof(void*); // Legal 
+size_t size = sizeof(void); // Illegal
+```
+#### Global and static pointers
+If a pointer is declared as global or static, `it is initialized to NULL when the program starts`.
+## Pointer Size and Types
+* A pointer to a char has the same size as a pointer to a structure. 
+* The size of a pointer to a function may be different from the size of a pointer to data.
+* The size of a pointer depends on the machine in use and the compiler.
+### Predefined Pointer-Related Types
+* `size_t`    : created to provide a safe type for sizes.
+* `ptrdiff_t` : Created to handle pointer arithmetic.
+* `intptr_t` and `uintptr_t` : Used for storing pointer address.
+
+#### size_t
+
+The declaration of size_t:
+```clike 
+#ifndef __SIZE_T
+#define __SIZE_T
+typedef unsigned int size_t;
+#endif
+```
+
+> It is good practice to use size_t when declaring variables for sizes such as the number of characters and array indexes. It should be used for loop counters, indexing into arrays, and sometimes for pointer arithmetic.
+
+#### intptr_t and uintptr_t
+They are useful for converting pointers to their integer representation.
+> If we try to assign the address of an integer to a pointer of type uintptr_t as follows, we will get a syntax error
+```clike
+int a = 12345;
+int *p = &a;
+int ptr = (int)p;
+```
+it'll cause `Wpointer-to-int-cast` warning, because sizeof(int) and sizeof(int pointer) are different.
+We need to use `intptr_t` or `uintptr_t` :
+```clike
+uintptr_t a = 12345;
+uintptr_t *p = &a;
+uintptr_t ptr = (uintptr_t)p;
+```
+### Multiple Levels of Indirection
+Using multiple levels of indirection provides additional flexibility in how code can be written and used. Certain types of operations would otherwise be more difficult.
+### Constants and Pointers
+We cannot dereference a constant pointer to change what the pointer references, but we can change the pointer.
+```clike
+int num = 10;
+const int *ptr1 = &num;         // ptr1 is a pointer variable point to a const int
+int *const ptr2 = &num;         // const pointer variable ptr2 point to a int, we cannot modify ptr2
+```
+Example:
+```clike
+int num = 5;
+const int limit = 500; 
+int *pi;                // Pointer to an integer
+const int *pci;         // Pointer to a constant integer
+
+pi = &num;
+pci = &limit;
+```
+* pci can be assigned to point to different constant integers
+* pci can be assigned to point to different nonconstant integers 
+* pci can be dereferenced for reading purposes
+* pci cannot be dereferenced to change what it points to
+
+### Constant pointers to "nonconstants"
+Example:
+```clike
+int num;
+int limit = 500;
+int *const cpi = &num;
+cpi = &limit;
+```
+The error message:
+```shell
+'cpi' : you cannot assign to a variable that is const
+```
+> reference Fig: In textbook p.29 Figure 1-13
+
+### Constant pointers to "constants"
+Given a constant pointer to a constant we cannot:
+* Modify the pointer
+* Modify the data pointed to by the pointer
+### Summary
+| Pointer | Pointer Modifiable | Data Pointed to Modifiable |
+| Pointer to a `nonconstant`| Y | Y |
+| Pointer to a `constant` | Y | N |
+| Constant pointer to a `nonconstant` | N | Y |
+| Constant pointer to a `constant` | N | N |
+
