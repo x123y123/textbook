@@ -99,7 +99,7 @@ pi = num;   // Syntax error
 ```
 > A null pointer should never be dereferenced because it does not contain a valid address. When executed it will result in the program terminating.
 
-```
+
 ### Using 0 or NULL
 The meaning of zero changes depending on its context. It might mean the integer zero in some contexts, and it might mean a null pointer in a different context. Consider the following example:
 ```c
