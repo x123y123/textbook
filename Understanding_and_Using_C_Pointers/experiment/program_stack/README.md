@@ -16,8 +16,8 @@ sum: 0x16dd433a0
 ## The concept
 
 1. ready to call `average()` in main function
-    1. push `parameters` to  stack memory  ----------------------- push `&a[0]` and `size` to stack memory
-    2. then, push `return 0` to stack memory --------------------- push address of `return 0`
+    1. push `parameters` to  stack memory -------- push `&a[0]` and `size` to stack memory
+    2. then, push `return 0` to stack memory ----- push address of `return 0`
     3. program counter(PC) set to first instruction in average() 
 2. execute average()
     1. push old frame pointer to stack memory
