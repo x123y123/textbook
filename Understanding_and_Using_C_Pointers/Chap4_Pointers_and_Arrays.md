@@ -49,4 +49,12 @@ pv = vector + 1; // it'll be fine
 > A `pointer` can be assigned a new value and reference a different section of memory.
 
 ## Using malloc to Create a One-Dimensional Array
+```c
+int *pv = (int *) malloc(5 * sizeof(int));
+for(int i = 0; i < 5; i++) {
+    //*(pv + i) = i + 1;
+    pv[i] = i + 1;
+}
+```
+## Using realloc Function to Resize an Array
 
