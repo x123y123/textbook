@@ -87,13 +87,14 @@ for (int i = 0; i < 5; i++) {
 }
 ```
 * Array of pointers expressions
-|Expression|Value|
-|----------|-----|
-|`*arr[0]` | 0   |
-|`**arr`   |0    |
-|`**(arr + 1)`|1 |
-|`arr[0][0]`| 0  |
-|`arr[3][0]`|3   |
+
+|Expression   |Value|
+|-------------|-----|
+|`*arr[0]`    |0    |
+|`**arr`      |0    |
+|`**(arr + 1)`|1    |
+|`arr[0][0]`  |0    | 
+|`arr[3][0]`  |3    |
 
 > The expression arr[3][1] does not work because the array the fourth element is pointing to does not have two elements.
 #### Two-dimensional array notation
