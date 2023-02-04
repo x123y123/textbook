@@ -36,7 +36,7 @@ strcpy(ptrPerson->firstName, "Tom");
 ptrPerson->age = 23;
 ```
 
-* Example: (using `deference + dot operator`)
+* Example: (using `dereference + dot operator`)
 ```c
 Person *ptrPerson;
 ptrPerson = (Person*) malloc(sizeof(Person));
