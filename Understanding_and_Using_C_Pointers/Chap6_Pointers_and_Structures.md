@@ -25,7 +25,7 @@ typedef struct _person {
 Person person;
 ```
 ## How can we use pointer to a structure?
-* use ==points-to operator(->)==
+> use points-to operator(`->`)
 
 * Example: (using `points-to operator`)
 ```c
