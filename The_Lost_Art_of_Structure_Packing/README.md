@@ -4,7 +4,7 @@
 > * chars can start on any byte address
 > * 2-byte shorts must start on an even address
 > * 4-byte ints or floats must start on an address divisible by 4
-> * 8-byte longs or doubles must start on an address divisible by 8. Signed or unsigned makes no difference
+> * 8-byte longs or doubles must start on an address divisible by 8
 
 ## Padding
 * In 64-bit machine
