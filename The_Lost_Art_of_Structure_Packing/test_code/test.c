@@ -18,7 +18,7 @@ static double diff_in_second(struct timespec t1, struct timespec t2)
 }
 
 struct AlignedStruct {
-    char c;
+    char c[8];
     int i __attribute__((aligned(16)));
     double d;
 };
@@ -37,7 +37,7 @@ int main() {
 
     // initialize the arrays
     for (int i = 0; i < ARRAY_SIZE; i++) {
-        aligned_arr[i].c = 'a';
+        aligned_arr[i].c = 'abcefils';
         aligned_arr[i].i = i;
         aligned_arr[i].d = i + 0.5;
 
@@ -46,30 +46,6 @@ int main() {
         unaligned_arr[i].d = i + 0.5;
     }
 
-    // access the variables in the aligned array and time how long it takes
-    clock_gettime(CLOCK_REALTIME, &start);
-    for (int i = 0; i < ARRAY_SIZE; i++) {
-        aligned_arr[i].c;
-    }
-    clock_gettime(CLOCK_REALTIME, &end);
-    cpu_time_used = diff_in_second(start, end);
-    printf("Time taken to access char variables in aligned array: %f seconds\n", cpu_time_used);
-
-    clock_gettime(CLOCK_REALTIME, &start);
-    for (int i = 0; i < ARRAY_SIZE; i++) {
-        aligned_arr[i].i;
-    }
-    clock_gettime(CLOCK_REALTIME, &end);
-    cpu_time_used = diff_in_second(start, end);
-    printf("Time taken to access int variables in aligned array: %f seconds\n", cpu_time_used);
-
-    clock_gettime(CLOCK_REALTIME, &start);
-    for (int i = 0; i < ARRAY_SIZE; i++) {
-        aligned_arr[i].d;
-    }
-    clock_gettime(CLOCK_REALTIME, &end);
-    cpu_time_used = diff_in_second(start, end);
-    printf("Time taken to access double variables in aligned array: %f seconds\n", cpu_time_used);
 
     // access the variables in the unaligned array and time how long it takes
     clock_gettime(CLOCK_REALTIME, &start);
@@ -96,6 +72,30 @@ int main() {
     cpu_time_used = diff_in_second(start, end);
     printf("Time taken to access double variables in unaligned array: %f seconds\n", cpu_time_used);
 
+    // access the variables in the aligned array and time how long it takes
+    clock_gettime(CLOCK_REALTIME, &start);
+    for (int i = 0; i < ARRAY_SIZE; i++) {
+        aligned_arr[i].c;
+    }
+    clock_gettime(CLOCK_REALTIME, &end);
+    cpu_time_used = diff_in_second(start, end);
+    printf("Time taken to access char variables in aligned array: %f seconds\n", cpu_time_used);
+
+    clock_gettime(CLOCK_REALTIME, &start);
+    for (int i = 0; i < ARRAY_SIZE; i++) {
+        aligned_arr[i].i;
+    }
+    clock_gettime(CLOCK_REALTIME, &end);
+    cpu_time_used = diff_in_second(start, end);
+    printf("Time taken to access int variables in aligned array: %f seconds\n", cpu_time_used);
+
+    clock_gettime(CLOCK_REALTIME, &start);
+    for (int i = 0; i < ARRAY_SIZE; i++) {
+        aligned_arr[i].d;
+    }
+    clock_gettime(CLOCK_REALTIME, &end);
+    cpu_time_used = diff_in_second(start, end);
+    printf("Time taken to access double variables in aligned array: %f seconds\n", cpu_time_used);
     return 0;
 }
 
