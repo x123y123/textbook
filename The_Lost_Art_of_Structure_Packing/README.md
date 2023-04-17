@@ -1,8 +1,11 @@
 # The Lost Art of Structure Packing
 * One of ways to reduce memory usage: `rearranging the order of structure members`
-```html
-chars can start on any byte address, but 2-byte shorts must start on an even address, 4-byte ints or floats must start on an address divisible by 4, and 8-byte longs or doubles must start on an address divisible by 8. Signed or unsigned makes no difference.
-```
+
+> * chars can start on any byte address
+> * 2-byte shorts must start on an even address
+> * 4-byte ints or floats must start on an address divisible by 4
+> * 8-byte longs or doubles must start on an address divisible by 8. Signed or unsigned makes no difference
+
 ## Padding
 * In 64-bit machine
 ```c
